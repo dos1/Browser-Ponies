@@ -3,10 +3,15 @@
 var observe   = BrowserPonies.Util.observe;
 var tag       = BrowserPonies.Util.tag;
 var $         = BrowserPonies.Util.$;
-var absUrl    = BrowserPonies.Util.URL.abs;
+var _absUrl   = BrowserPonies.Util.URL.abs;
 var has       = BrowserPonies.Util.has;
 var partial   = BrowserPonies.Util.partial;
 var dataUrl   = BrowserPonies.Util.dataUrl;
+
+function absUrl (url) {
+	// force https
+	return _absUrl(url).replace(/^http:/,'https:');
+}
 
 if (typeof($x) === "undefined" && document.evaluate) {
 	window.$x = function (xpath, context) {
@@ -63,7 +68,7 @@ function init () {
 
 	// build pony list:
 	list.appendChild(render('Random Pony',
-		'ponies/random%20pony/mystery_thumb.png', 0, categories));
+		'ponies/random%20pony/random-pony.gif', 0, categories));
 	for (var i = 0, n = names.length; i < n; ++ i) {
 		var pony = ponies[names[i]];
 		list.appendChild(render(pony.name, pony.all_behaviors[0].rightimage,
